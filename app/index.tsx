@@ -14,7 +14,6 @@ export default function Index() {
       screenOptions={{ 
         headerShown: false,
         tabBarStyle: {
-          marginBottom: -25, // Decrease bottom margin
           marginTop: 15,
           borderTopWidth: 0, // Remove the top border
         } 
