@@ -1,37 +1,27 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
+import { NavigationContainer } from "@react-navigation/native"
+import { createStackNavigator } from "@react-navigation/stack"
+import Splash from "./screens/Splash"
+import Intro from "./screens/Intro"
+import Login from "./screens/Login"
+import Signup from "./screens/SignUp"
+import Explore from "./screens/Explore"
+import Home from "./screens/Home"
+import Collection from "./screens/Collection"
 
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
+const Stack = createStackNavigator();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
-
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </ThemeProvider>
-  );
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Splash" component={Splash} />
+        <Stack.Screen name="Intro" component={Intro} />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Signup" component={Signup} />
+        <Stack.Screen name="Explore" component={Explore} />
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Collection" component={Collection} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
 }
