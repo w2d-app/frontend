@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Image } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Login: React.FC = () => {
     const [username, setUsername] = useState('');
@@ -9,48 +10,90 @@ const Login: React.FC = () => {
         console.log(username, password)
     };
 
+    const handleGoogleSubmit = () => {
+        console.log("Connect this to BK's code.")
+    };
+
     return (
-        <View style={styles.container}>
-            <Text style={styles.label}>Username</Text>
-            <TextInput
-                style={styles.input}
-                value={username}
-                onChangeText={setUsername}
-                autoCapitalize="none"
-                placeholder="Username"
-                
+        <View style={styles.pageContainer}>
+            <Image
+                source={require('../../assets/images/logo.png')}
+                style={ styles.logoContainer}
             />
-            <Text style={styles.label}>Password</Text>
-            <TextInput
-                style={styles.input}
-                value={username}
-                onChangeText={setUsername}
-                autoCapitalize="none"
-                placeholder="Password"
-                onSubmitEditing={handleSubmit}
-            />
+            <View style={styles.inputContainer}>
+                <Ionicons name={'person-outline'} />
+                <TextInput
+                    style={styles.inputField}
+                    value={username}
+                    onChangeText={setUsername}
+                    autoCapitalize="none"
+                    placeholder="Username"
+                />
+            </View>
+            <View style={styles.inputContainer}>
+                <Ionicons name={'key-outline'} />
+                <TextInput
+                    style={styles.inputField}
+                    value={password}
+                    onChangeText={setPassword}
+                    autoCapitalize="none"
+                    placeholder="Password"
+                    onSubmitEditing={handleSubmit}
+                    secureTextEntry
+                />
+            </View>
+            <Button title="Login" onPress={handleSubmit} style={styles.loginButton}/>
+            <Text> ——— Or continue with ——— </Text>
 
-
-            <Button title="Login" onPress={handleSubmit} />
-
+            <View style={styles.buttonContainer}>
+                <Ionicons name={'logo-google'} />
+                <Text onPress={handleGoogleSubmit}> Continue with Google </Text>
+            </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
+    pageContainer: {
         height: '100%',
         width: '100%',
+        flex: 1,
+        alignItems: 'center', // Aligns content along primary axis
+        justifyContent: 'center', // Aligns content along secondary axis
+        backgroundColor: 'white',
+        gap: 20,
     },
-    input: {
-        height: 40,
-        color: 'black',
+    inputField: {
+        color: 'grey',
+        marginLeft: 5,
+    },
+    inputContainer: {
+        flexDirection: 'row',
+        padding: 20,
         borderColor: 'black',
+        borderWidth: 0.3,
+        borderRadius: 8,
+        alignItems: 'center', // In this case, primary axis is y-axis
+        width: '70%',
     },
-    label: {
-        color: 'black',
+    logoContainer: {
+        width: 100,
+        height: 100,
+    },
+    loginButton: {
+        backgroundColor: '#6890EE',
+        color: 'white'
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        padding: 10,
+        borderColor: 'black',
+        borderWidth: 0.3,
+        borderRadius: 20,
+        alignItems: 'center', // In this case, primary axis is y-axis
+        justifyContent: 'center',
+        width: '70%',
     }
-
 });
 
 
