@@ -1,11 +1,12 @@
 import React from 'react';
+import { View, Text } from 'react-native';
 
 const SignUp: React.FC = () => {
     return (
-        <div>
-            <h1>Sign Up</h1>
+        <View>
+            <Text>Sign Up</Text>
             {/* Add your sign up form here */}
-        </div>
+        </View>
     );
 };
 

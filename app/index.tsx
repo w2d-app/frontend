@@ -1,5 +1,4 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -72,25 +71,25 @@ const BottomTabNavigator = () => {
 // We can see all the different pages in the Tab navigator, as you click from one to the other in the navbar.
 export default function Index() {
   return (
-      <Stack.Navigator
-        initialRouteName="Login"
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
-        <Stack.Screen
-          name="Login"
-          component={Login}
-        />
-        <Stack.Screen
-          name="TabNavigator"
-          component={BottomTabNavigator}
-        />
-        <Stack.Screen
-          name="SignUp"
-          component={SignUp}
-        />
+    <Stack.Navigator
+      initialRouteName="Login"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen
+        name="Login"
+        component={Login}
+      />
+      <Stack.Screen
+        name="TabNavigator"
+        component={BottomTabNavigator}
+      />
+      <Stack.Screen
+        name="SignUp"
+        component={SignUp}
+      />
 
-      </Stack.Navigator>
+    </Stack.Navigator>
   );
 }
