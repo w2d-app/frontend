@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Image } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -55,7 +55,9 @@ const Login: React.FC = () => {
                     secureTextEntry
                 />
             </View>
-            <Button title="Login" onPress={handleSubmit} />
+            <TouchableOpacity onPress={handleSubmit} style={styles.loginButton}>
+                <Text style={styles.buttonText}>Login</Text>
+            </TouchableOpacity>
             <Text> ——— Or continue with ——— </Text>
 
             <View style={styles.buttonContainer}>
@@ -74,7 +76,7 @@ const styles = StyleSheet.create({
         alignItems: 'center', // Aligns content along primary axis
         justifyContent: 'center', // Aligns content along secondary axis
         backgroundColor: 'white',
-        gap: 20,
+        gap: 25,
     },
     inputField: {
         color: 'grey',
@@ -94,9 +96,14 @@ const styles = StyleSheet.create({
         height: 100,
     },
     loginButton: {
-        backgroundColor: '#6890EE',
-        color: 'white'
+        backgroundColor: '#000', // Example background color
+        padding: 10, // Example padding
+        borderRadius: 5, // Example border radius
+        alignItems: 'center' // Center text horizontally
     },
+    buttonText: {
+        color: '#fff', // Example text color
+      },
     buttonContainer: {
         flexDirection: 'row',
         padding: 10,
