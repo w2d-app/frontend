@@ -1,86 +1,32 @@
-import React, {useState, useEffect, useCallback} from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import {useNavigation, useFocusEffect} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-
-type RootStackParamList = {
-  TabNavigator: undefined;
-  SignUp: undefined;
-};
-
-type LoginScreenNavgationProp = StackNavigationProp<
-  RootStackParamList,
-  'TabNavigator'
->;
+import React, { useState } from "react";
+import { View, Text, TextInput, Button, StyleSheet, Image } from "react-native";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { useNavigation } from "@react-navigation/native"; // Import the hook
 
 const Login: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [loginError, setLoginError] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-  const navigation = useNavigation<LoginScreenNavgationProp>();
+  const navigation = useNavigation(); // Get the navigation object
 
-  /* We have to use useFocusEffect to clear the login error, username and password when the screen is focused
-  we cannot use a useEffect hook because it will not run when the screen is focused again
-  as Login is the default screen, it will be kept in memory to preserve its state, so it will not unmoount 
-  just by navigating to another screen */
-  useFocusEffect(
-    useCallback(() => {
-      // Clear the login error, username and password when the screen is focused
-      setUsername('');
-      setPassword('');
-      setLoginError('');
-
-      return () => {
-        // Optional: Do something when the screen loses focus
-      };
-    }, []),
-  );
-
-  //Use Effect for dynamic error handling:
-  useEffect(() => {
-    if (username && password && loginError) {
-      setLoginError('');
-    }
-  }, [username, password]);
-
-  const handleLogin = () => {
-    if (username.trim() === '' || password.trim() === '') {
-      setLoginError('Username or password cannot be empty.');
-      return;
-    }
-
+  const handleSubmit = () => {
     console.log(username, password);
-    //TODO: Add login logic here.
-    //If login is successful:
-    navigation.navigate('TabNavigator'); // Navigate to TabNavigator screen
-    //If login fails:
-    //setLoginError('Invalid username or password.');
+    // Add your login logic here. If login is successful:
+    navigation.navigate("TabNavigator"); // Navigate to TabNavigator screen
   };
 
-  const handleGoogleLogin = () => {
-    //TODO: Add Google login logic here
+  const handleGoogleSubmit = () => {
     console.log("Connect this to BK's code.");
-    //TODO: If login fails:
-    //setLoginError('Google login failed. Try again later.');
   };
 
   return (
     <View style={styles.pageContainer}>
       <Image
-        source={require('../../assets/images/logo.png')}
+        source={require("../../assets/images/logo.png")}
         style={styles.logoContainer}
       />
       <View style={styles.inputContainer}>
-        <Ionicons name={'person-outline'} />
+        <Ionicons name={"person-outline"} />
         <TextInput
           style={styles.inputField}
           value={username}
@@ -90,31 +36,23 @@ const Login: React.FC = () => {
         />
       </View>
       <View style={styles.inputContainer}>
-        <Ionicons name={'key-outline'} />
+        <Ionicons name={"key-outline"} />
         <TextInput
           style={styles.inputField}
           value={password}
           onChangeText={setPassword}
           autoCapitalize="none"
           placeholder="Password"
-          onSubmitEditing={handleLogin}
+          onSubmitEditing={handleSubmit}
           secureTextEntry
         />
       </View>
-      {loginError ? <Text style={styles.errorText}>{loginError}</Text> : null}
-      <TouchableOpacity onPress={handleLogin} style={styles.loginButton}>
-        <Text style={styles.buttonText}>Log in</Text>
-      </TouchableOpacity>
+      <Button title="Login" onPress={handleSubmit} />
       <Text> ——— Or continue with ——— </Text>
+
       <View style={styles.buttonContainer}>
-        <Ionicons name={'logo-google'} />
-        <Text onPress={handleGoogleLogin}>{'   '}Continue with Google </Text>
-      </View>
-      <View style={styles.linkTextContainer}>
-        <Text style={styles.text}>Don't have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-          <Text style={styles.linkText}>Sign up</Text>
-        </TouchableOpacity>
+        <Ionicons name={"logo-google"} />
+        <Text onPress={handleGoogleSubmit}> Continue with Google </Text>
       </View>
     </View>
   );
@@ -122,70 +60,44 @@ const Login: React.FC = () => {
 
 const styles = StyleSheet.create({
   pageContainer: {
-    height: '100%',
-    width: '100%',
+    height: "100%",
+    width: "100%",
     flex: 1,
-    alignItems: 'center', // Aligns content along primary axis
-    justifyContent: 'center', // Aligns content along secondary axis
-    backgroundColor: 'white',
-    gap: 25,
+    alignItems: "center", // Aligns content along primary axis
+    justifyContent: "center", // Aligns content along secondary axis
+    backgroundColor: "white",
+    gap: 20,
   },
   inputField: {
-    color: 'grey',
+    color: "grey",
     marginLeft: 5,
-    width: '100%',
   },
   inputContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     padding: 20,
-    borderColor: 'black',
+    borderColor: "black",
     borderWidth: 0.3,
     borderRadius: 8,
-    alignItems: 'center', // In this case, primary axis is y-axis
-    width: '70%',
+    alignItems: "center", // In this case, primary axis is y-axis
+    width: "70%",
   },
   logoContainer: {
-    width: 200,
-    height: 200,
+    width: 100,
+    height: 100,
   },
   loginButton: {
-    backgroundColor: '#000', // Example background color
-    paddingVertical: 15, // Example padding
-    paddingHorizontal: 80, // Example horizontal padding
-    borderRadius: 25, // Example border radius
-    alignItems: 'center', // Center text horizontally
-  },
-  buttonText: {
-    color: '#fff', // Example text color
-    fontSize: 18, // Example font size
+    backgroundColor: "#6890EE",
+    color: "white",
   },
   buttonContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     padding: 10,
-    borderColor: 'black',
+    borderColor: "black",
     borderWidth: 0.3,
     borderRadius: 20,
-    alignItems: 'center', // In this case, primary axis is y-axis
-    justifyContent: 'center',
-    width: '70%',
-  },
-  linkTextContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    fontSize: 16,
-    color: '#333', // Change as needed
-  },
-  linkText: {
-    fontSize: 16,
-    color: '#0066cc', // Example color for a clickable link
-    fontWeight: 'bold',
-  },
-  errorText: {
-    color: 'red',
-    fontSize: 16,
+    alignItems: "center", // In this case, primary axis is y-axis
+    justifyContent: "center",
+    width: "70%",
   },
 });
 
