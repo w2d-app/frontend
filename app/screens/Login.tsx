@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Image } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native'; // Import the hook
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+type RootStackParamList = {
+    TabNavigator: undefined;
+}
+
+type LoginScreenNavgationProp = StackNavigationProp<RootStackParamList, 'TabNavigator'>;
+
 
 const Login: React.FC = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const navigation = useNavigation(); // Get the navigation object
+    const navigation = useNavigation<LoginScreenNavgationProp>(); 
 
     const handleSubmit = () => {
         console.log(username, password);

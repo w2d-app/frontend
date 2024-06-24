@@ -54,7 +54,7 @@ const BottomTabNavigator = () => {
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons
-              name={focused ? 'albums' : 'album-outline'}
+              name={focused ? 'albums' : 'albums-outline'}
               size={size}
               color={color}
             />
