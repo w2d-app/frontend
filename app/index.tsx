@@ -1,17 +1,16 @@
-import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import React from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 // Tab navigation screens
-import Home from './screens/Home';
-import Explore from './screens/Explore';
-import Collection from './screens/Collection';
+import Home from "./screens/Home";
+import Explore from "./screens/Explore";
+import Collection from "./screens/Collection";
 
 // Stack navigation screens
-import Login from './screens/Login';
-import SignUp from './screens/SignUp';
-
+import Login from "./screens/Login";
+import SignUp from "./screens/SignUp";
 
 // Creating instances of the navigators
 const Tab = createBottomTabNavigator();
@@ -19,16 +18,15 @@ const Stack = createStackNavigator();
 
 const BottomTabNavigator = () => {
   return (
-
     // Tab.screen is each "page" of the app. We wrap it in the Tab navigator because the navigation at the bottom is present in each main screen.
     <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen
-        name="Home"
-        component={Home}
+        name="Explore"
+        component={Explore}
         options={{
-          tabBarIcon: ({ focused, color, size }) => ( // Using () instead of {} is a shorthand for "return." i.e., {} would require a return statement.
+          tabBarIcon: ({ focused, color, size }) => (
             <Ionicons
-              name={focused ? 'home' : 'home-outline'}
+              name={focused ? "search" : "search-outline"}
               size={size}
               color={color}
             />
@@ -36,12 +34,14 @@ const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Explore"
-        component={Explore}
+        name="Home"
+        component={Home}
         options={{
-          tabBarIcon: ({ focused, color, size }) => (
+          tabBarIcon: (
+            { focused, color, size } // Using () instead of {} is a shorthand for "return." i.e., {} would require a return statement.
+          ) => (
             <Ionicons
-              name={focused ? 'search' : 'search-outline'}
+              name={focused ? "home" : "home-outline"}
               size={size}
               color={color}
             />
@@ -54,7 +54,7 @@ const BottomTabNavigator = () => {
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons
-              name={focused ? 'albums' : 'album-outline'}
+              name={focused ? "albums" : "album-outline"}
               size={size}
               color={color}
             />
@@ -65,9 +65,7 @@ const BottomTabNavigator = () => {
   );
 };
 
-
-
-// Stack navigator pushes and pops screen, making them look like a single screen. 
+// Stack navigator pushes and pops screen, making them look like a single screen.
 // We can see all the different pages in the Tab navigator, as you click from one to the other in the navbar.
 export default function Index() {
   return (
@@ -77,19 +75,10 @@ export default function Index() {
         headerShown: false,
       }}
     >
-      <Stack.Screen
-        name="Login"
-        component={Login}
-      />
-      <Stack.Screen
-        name="TabNavigator"
-        component={BottomTabNavigator}
-      />
-      <Stack.Screen
-        name="SignUp"
-        component={SignUp}
-      />
-
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="TabNavigator" component={BottomTabNavigator} />
+      <Stack.Screen name="SignUp" component={SignUp} />
+      <Stack.Screen name="Explore" component={Explore} />
     </Stack.Navigator>
   );
 }
