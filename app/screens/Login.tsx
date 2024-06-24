@@ -73,7 +73,7 @@ const Login: React.FC = () => {
 
       <View style={styles.buttonContainer}>
         <Ionicons name={'logo-google'} />
-        <Text onPress={handleGoogleLogin}> Continue with Google </Text>
+        <Text onPress={handleGoogleLogin}>{"   "}Continue with Google </Text>
       </View>
       <View style={styles.linkTextContainer}>
         <Text style={styles.text}>Don't have an account? </Text>
