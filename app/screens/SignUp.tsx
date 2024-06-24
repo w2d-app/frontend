@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -25,18 +25,62 @@ const SignUp: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const navigation = useNavigation<SignUpScreenNavigationProp>();
 
-  const handleSignUp = () => {
-    // TODO: Add sign up logic here. Verify that password and confirmPassword match
-    if (password === confirmPassword) {
-      console.log(username, password);
-      // If sign up is successful:
-      navigation.navigate('TabNavigator'); // Navigate to TabNavigator screen
-    } else {
-      console.error('Passwords do not match.');
+  //Use Effects for dynamic error handling:
+  useEffect(() => {
+    // Reset error messages when the component mounts
+    setErrorMessage('');
+  }, []);
+
+  useEffect(() => {
+    if (username.length >= 4) {
+      setErrorMessage((prev) => prev === 'Username must be at least 4 characters long.' ? '' : prev);
     }
+  }, [username]);
+
+  useEffect(() => {
+    if (password.length >= 6) {
+      setErrorMessage((prev) => prev === 'Password must be at least 6 characters long.' ? '' : prev);
+    }
+    if (password === confirmPassword || confirmPassword === '') {
+      setErrorMessage((prev) => prev === 'Passwords do not match.' ? '' : prev);
+    }
+  }, [password, confirmPassword]);
+
+  useEffect(() => {
+    if (confirmPassword.length && password === confirmPassword) {
+      setErrorMessage('');
+    }
+  }, [confirmPassword, password]);
+
+  const handleSignUp = () => {
+    setErrorMessage(''); // Clear previous error messages
+
+    // Validate username length
+    if (username.length < 4) {
+      setErrorMessage('Username must be at least 4 characters long.');
+      return;
+    }
+
+    // Validate password length
+    if (password.length < 6) {
+      setErrorMessage('Password must be at least 6 characters long.');
+      return;
+    }
+
+    // Validate password match
+    if (password !== confirmPassword) {
+      setErrorMessage('Passwords do not match.');
+      return;
+    }
+
+    // TODO: Integrate actual sign up logic here
+    console.log(username, password);
+    //If sign up is successful:
+    navigation.navigate('TabNavigator'); // Navigate to TabNavigator screen
   };
 
   return (
@@ -77,13 +121,16 @@ const SignUp: React.FC = () => {
           secureTextEntry
         />
       </View>
+      {errorMessage ? (
+        <Text style={styles.errorText}>{errorMessage}</Text>
+      ) : null}
       <TouchableOpacity onPress={handleSignUp} style={styles.signUpButton}>
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
       <Text> ——— Or continue with ——— </Text>
       <View style={styles.buttonContainer}>
         <Ionicons name={'logo-google'} />
-        <Text>{"   "}Continue with Google</Text>
+        <Text>{'   '}Continue with Google</Text>
       </View>
       <View style={styles.linkTextContainer}>
         <Text style={styles.text}>Already have an account? </Text>
@@ -108,6 +155,7 @@ const styles = StyleSheet.create({
   inputField: {
     color: 'grey',
     marginLeft: 5,
+    width: '100%',
   },
   inputContainer: {
     flexDirection: 'row',
@@ -156,6 +204,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#0066cc', // Example color for a clickable link
     fontWeight: 'bold',
+  },
+  errorText: {
+    color: 'red',
+    fontSize: 16,
   },
 });
 
