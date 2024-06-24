@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {
   View,
   Text,
@@ -8,11 +8,12 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
 type RootStackParamList = {
   TabNavigator: undefined;
+  SignUp: undefined;
 };
 
 type LoginScreenNavgationProp = StackNavigationProp<
@@ -23,17 +24,53 @@ type LoginScreenNavgationProp = StackNavigationProp<
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
 
   const navigation = useNavigation<LoginScreenNavgationProp>();
 
-  const handleSubmit = () => {
+  /* We have to use useFocusEffect to clear the login error, username and password when the screen is focused
+  we cannot use a useEffect hook because it will not run when the screen is focused again
+  as Login is the default screen, it will be kept in memory to preserve its state, so it will not unmoount 
+  just by navigating to another screen */
+  useFocusEffect(
+    useCallback(() => {
+      // Clear the login error, username and password when the screen is focused
+      setUsername('');
+      setPassword('');
+      setLoginError('');
+
+      return () => {
+        // Optional: Do something when the screen loses focus
+      };
+    }, []),
+  );
+
+  //Use Effect for dynamic error handling:
+  useEffect(() => {
+    if (username && password && loginError) {
+      setLoginError('');
+    }
+  }, [username, password]);
+
+  const handleLogin = () => {
+    if (username.trim() === '' || password.trim() === '') {
+      setLoginError('Username or password cannot be empty.');
+      return;
+    }
+
     console.log(username, password);
-    // Add your login logic here. If login is successful:
+    //TODO: Add login logic here.
+    //If login is successful:
     navigation.navigate('TabNavigator'); // Navigate to TabNavigator screen
+    //If login fails:
+    //setLoginError('Invalid username or password.');
   };
 
-  const handleGoogleSubmit = () => {
+  const handleGoogleLogin = () => {
+    //TODO: Add Google login logic here
     console.log("Connect this to BK's code.");
+    //TODO: If login fails:
+    //setLoginError('Google login failed. Try again later.');
   };
 
   return (
@@ -60,18 +97,24 @@ const Login: React.FC = () => {
           onChangeText={setPassword}
           autoCapitalize="none"
           placeholder="Password"
-          onSubmitEditing={handleSubmit}
+          onSubmitEditing={handleLogin}
           secureTextEntry
         />
       </View>
-      <TouchableOpacity onPress={handleSubmit} style={styles.loginButton}>
-        <Text style={styles.buttonText}>Login</Text>
+      {loginError ? <Text style={styles.errorText}>{loginError}</Text> : null}
+      <TouchableOpacity onPress={handleLogin} style={styles.loginButton}>
+        <Text style={styles.buttonText}>Log in</Text>
       </TouchableOpacity>
       <Text> ——— Or continue with ——— </Text>
-
       <View style={styles.buttonContainer}>
         <Ionicons name={'logo-google'} />
-        <Text onPress={handleGoogleSubmit}> Continue with Google </Text>
+        <Text onPress={handleGoogleLogin}>{'   '}Continue with Google </Text>
+      </View>
+      <View style={styles.linkTextContainer}>
+        <Text style={styles.text}>Don't have an account? </Text>
+        <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+          <Text style={styles.linkText}>Sign up</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -90,6 +133,7 @@ const styles = StyleSheet.create({
   inputField: {
     color: 'grey',
     marginLeft: 5,
+    width: '100%',
   },
   inputContainer: {
     flexDirection: 'row',
@@ -101,17 +145,19 @@ const styles = StyleSheet.create({
     width: '70%',
   },
   logoContainer: {
-    width: 100,
-    height: 100,
+    width: 200,
+    height: 200,
   },
   loginButton: {
     backgroundColor: '#000', // Example background color
-    padding: 10, // Example padding
-    borderRadius: 5, // Example border radius
+    paddingVertical: 15, // Example padding
+    paddingHorizontal: 80, // Example horizontal padding
+    borderRadius: 25, // Example border radius
     alignItems: 'center', // Center text horizontally
   },
   buttonText: {
     color: '#fff', // Example text color
+    fontSize: 18, // Example font size
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -122,6 +168,24 @@ const styles = StyleSheet.create({
     alignItems: 'center', // In this case, primary axis is y-axis
     justifyContent: 'center',
     width: '70%',
+  },
+  linkTextContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    fontSize: 16,
+    color: '#333', // Change as needed
+  },
+  linkText: {
+    fontSize: 16,
+    color: '#0066cc', // Example color for a clickable link
+    fontWeight: 'bold',
+  },
+  errorText: {
+    color: 'red',
+    fontSize: 16,
   },
 });
 
