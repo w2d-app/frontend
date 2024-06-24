@@ -1,24 +1,29 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Image } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native'; // Import the hook
 
 const Login: React.FC = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const navigation = useNavigation(); // Get the navigation object
+
     const handleSubmit = () => {
-        console.log(username, password)
+        console.log(username, password);
+        // Add your login logic here. If login is successful:
+        navigation.navigate('TabNavigator'); // Navigate to TabNavigator screen
     };
 
     const handleGoogleSubmit = () => {
-        console.log("Connect this to BK's code.")
+        console.log("Connect this to BK's code.");
     };
 
     return (
         <View style={styles.pageContainer}>
             <Image
                 source={require('../../assets/images/logo.png')}
-                style={ styles.logoContainer}
+                style={styles.logoContainer}
             />
             <View style={styles.inputContainer}>
                 <Ionicons name={'person-outline'} />
@@ -42,7 +47,7 @@ const Login: React.FC = () => {
                     secureTextEntry
                 />
             </View>
-            <Button title="Login" onPress={handleSubmit} style={styles.loginButton}/>
+            <Button title="Login" onPress={handleSubmit} />
             <Text> ——— Or continue with ——— </Text>
 
             <View style={styles.buttonContainer}>
@@ -95,6 +100,5 @@ const styles = StyleSheet.create({
         width: '70%',
     }
 });
-
 
 export default Login;
