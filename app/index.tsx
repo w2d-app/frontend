@@ -75,8 +75,8 @@ export default function Index() {
         headerShown: false,
       }}>
       <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="TabNavigator" component={BottomTabNavigator} />
       <Stack.Screen name="SignUp" component={SignUp} />
+      <Stack.Screen name="TabNavigator" component={BottomTabNavigator} />
     </Stack.Navigator>
   );
 }

@@ -13,6 +13,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 
 type RootStackParamList = {
   TabNavigator: undefined;
+  SignUp: undefined;
 };
 
 type LoginScreenNavgationProp = StackNavigationProp<
@@ -26,13 +27,14 @@ const Login: React.FC = () => {
 
   const navigation = useNavigation<LoginScreenNavgationProp>();
 
-  const handleSubmit = () => {
+  const handleLogin = () => {
     console.log(username, password);
-    // Add your login logic here. If login is successful:
+    //TODO: Add login logic here. If login is successful:
     navigation.navigate('TabNavigator'); // Navigate to TabNavigator screen
   };
 
-  const handleGoogleSubmit = () => {
+  const handleGoogleLogin = () => {
+    //TODO: Add Google login logic here
     console.log("Connect this to BK's code.");
   };
 
@@ -60,18 +62,24 @@ const Login: React.FC = () => {
           onChangeText={setPassword}
           autoCapitalize="none"
           placeholder="Password"
-          onSubmitEditing={handleSubmit}
+          onSubmitEditing={handleLogin}
           secureTextEntry
         />
       </View>
-      <TouchableOpacity onPress={handleSubmit} style={styles.loginButton}>
-        <Text style={styles.buttonText}>Login</Text>
+      <TouchableOpacity onPress={handleLogin} style={styles.loginButton}>
+        <Text style={styles.buttonText}>Log in</Text>
       </TouchableOpacity>
       <Text> ——— Or continue with ——— </Text>
 
       <View style={styles.buttonContainer}>
         <Ionicons name={'logo-google'} />
-        <Text onPress={handleGoogleSubmit}> Continue with Google </Text>
+        <Text onPress={handleGoogleLogin}> Continue with Google </Text>
+      </View>
+      <View style={styles.linkTextContainer}>
+        <Text style={styles.text}>Don't have an account? </Text>
+        <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+          <Text style={styles.linkText}>Sign up</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -101,17 +109,19 @@ const styles = StyleSheet.create({
     width: '70%',
   },
   logoContainer: {
-    width: 100,
-    height: 100,
+    width: 200,
+    height: 200,
   },
   loginButton: {
     backgroundColor: '#000', // Example background color
-    padding: 10, // Example padding
-    borderRadius: 5, // Example border radius
+    paddingVertical: 15, // Example padding
+    paddingHorizontal: 80, // Example horizontal padding
+    borderRadius: 25, // Example border radius
     alignItems: 'center', // Center text horizontally
   },
   buttonText: {
     color: '#fff', // Example text color
+    fontSize: 18, // Example font size
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -122,6 +132,20 @@ const styles = StyleSheet.create({
     alignItems: 'center', // In this case, primary axis is y-axis
     justifyContent: 'center',
     width: '70%',
+  },
+  linkTextContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    fontSize: 16,
+    color: '#333', // Change as needed
+  },
+  linkText: {
+    fontSize: 16,
+    color: '#0066cc', // Example color for a clickable link
+    fontWeight: 'bold',
   },
 });
 
