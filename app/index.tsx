@@ -19,7 +19,7 @@ const Stack = createStackNavigator();
 const BottomTabNavigator = () => {
   return (
     // Tab.screen is each "page" of the app. We wrap it in the Tab navigator because the navigation at the bottom is present in each main screen.
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
+    <Tab.Navigator screenOptions={{headerShown: false}}>
       <Tab.Screen
         name="Explore"
         component={Explore}
@@ -52,7 +52,7 @@ const BottomTabNavigator = () => {
         name="Collection"
         component={Collection}
         options={{
-          tabBarIcon: ({ focused, color, size }) => (
+          tabBarIcon: ({focused, color, size}) => (
             <Ionicons
               name={focused ? "albums" : "album-outline"}
               size={size}
