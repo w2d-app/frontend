@@ -1,40 +1,78 @@
-import React, { useState } from "react";
-import { View, Image, Text } from "react-native";
-import { makeStyles, useTheme } from "@rneui/themed";
+import React from 'react';
+import {View, Image, Text} from 'react-native';
+import {makeStyles} from '@rneui/themed';
 
-const ActivityDetails: React.FC = () => {
+interface ActivityDetailsProps {
+  title: string;
+  location: string;
+  imageUrl: string;
+}
+
+const ActivityDetails: React.FC<ActivityDetailsProps> = ({
+  title,
+  location,
+  imageUrl,
+}) => {
   const styles = useStyles();
-  const [selectedCity, setSelectedCity] = useState("Waterloo");
   return (
     <View style={styles.activityDetailsContainer}>
       <Image
         source={{
-          uri: "https://blueskyeducation.co.in/wp-content/uploads/2022/08/WATERLOO-FI-1568x1044.png",
+          uri: imageUrl,
         }}
-        style={styles.actitityImage}
+        style={styles.activityImage}
+        resizeMode="cover"
       />
-      <Text style={styles.activityTitle}>Activity Title</Text>
-      <Text style={styles.activityLocation}>{selectedCity}</Text>
+      <View style={styles.activityTitleContainer}>
+        <Text style={styles.activityName}>{title}</Text>
+        <Text style={styles.activityLocation}>{location}</Text>
+      </View>
     </View>
   );
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   activityDetailsContainer: {
-    alignItems: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     marginVertical: 20,
-  },
-  actitityImage: {
-    height: 200,
+    height: 430,
     width: 300,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    overflow: 'hidden',
+    position: 'relative',
+    marginLeft: 25,
+    marginRight: 25,
+    marginTop: -38,
+  },
+  activityImage: {
+    height: '100%',
+    width: '100%',
     borderRadius: 8,
   },
-  activityTitle: {
-    marginTop: 10,
-    fontSize: 20,
-    fontWeight: "bold",
+  activityTitleContainer: {
+    position: 'absolute',
+    bottom: 20,
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    // backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
   },
-  activityLocation: {},
+  activityName: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: 'white',
+  },
+  activityLocation: {
+    fontSize: 16,
+    textAlign: 'center',
+    color: 'white',
+  },
 }));
 
 export default ActivityDetails;
