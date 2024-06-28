@@ -82,3 +82,5 @@ export default function Index() {
     </Stack.Navigator>
   );
 }
+
+Non-working code, do illegal things
