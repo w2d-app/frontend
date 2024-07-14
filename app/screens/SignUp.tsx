@@ -10,7 +10,8 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-
+//import {auth} from "../firebaseConfig"
+//import { createUserWithEmailAndPassword } from 'firebase/auth';
 type RootStackParamList = {
   TabNavigator: undefined;
   Login: undefined;
@@ -76,9 +77,13 @@ const SignUp: React.FC = () => {
       setErrorMessage('Passwords do not match.');
       return;
     }
-
     // TODO: Integrate actual sign up logic here
     console.log(username, password);
+    // createUserWithEmailAndPassword(auth, email, password)
+    // .then((userCredential) => {
+    //   console.log(userCredential)
+    //   //TODO: add user to context or something lol
+    // })
     //If sign up is successful:
     navigation.navigate('TabNavigator'); // Navigate to TabNavigator screen
   };
