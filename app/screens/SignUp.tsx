@@ -10,6 +10,7 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
+
 //import {auth} from "../firebaseConfig"
 //import { createUserWithEmailAndPassword } from 'firebase/auth';
 type RootStackParamList = {

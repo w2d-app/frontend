@@ -1,4 +1,4 @@
-{
+export default {
   "expo": {
     "name": "travel-app",
     "slug": "travel-app",
@@ -12,14 +12,19 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+  
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "app.w2d",
+      "googleServicesFile": process.env.google_service_info_plist
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package":  "app.w2d",
+      "googleServicesFile": process.env.google_services_json
     },
     "web": {
       "bundler": "metro",
@@ -27,7 +32,8 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "@react-native-google-signin/google-signin"
     ],
     "experiments": {
       "typedRoutes": true

@@ -10,7 +10,7 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-
+import {GoogleSignin, GoogleSigninButton, User} from "@react-native-google-signin/google-signin"
 type RootStackParamList = {
   TabNavigator: undefined;
   SignUp: undefined;
@@ -25,7 +25,8 @@ const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
-
+  const [googleError, setGoogleError] = useState();
+  const [googleUserInfo, setGoogleUserInfo] = useState<User>();
   const navigation = useNavigation<LoginScreenNavgationProp>();
 
   /* We have to use useFocusEffect to clear the login error, username and password when the screen is focused
@@ -51,6 +52,25 @@ const Login: React.FC = () => {
       setLoginError('');
     }
   }, [username, password]);
+  useEffect(() => {
+    GoogleSignin.configure(
+      {
+        webClientId: "1081340134333-r7mlc1is85ijdkk87inf8gpc4hc0f0jg.apps.googleusercontent.com"
+      }
+    );
+  }, [])
+
+  const googleLogin = async () => {
+    try {
+      await GoogleSignin.hasPlayServices()
+      const user = await GoogleSignin.signIn()
+      setGoogleUserInfo(user);
+      setGoogleError(undefined)
+    } catch (e) {
+      setGoogleError(e)
+    }
+
+  }
 
   const handleLogin = () => {
     if (username.trim() === '' || password.trim() === '') {
@@ -108,9 +128,8 @@ const Login: React.FC = () => {
       <Text> ——— Or continue with ——— </Text>
       <View style={styles.buttonContainer}>
         <Ionicons name={'logo-google'} />
-        <Text onPress={handleGoogleLogin}>{'   '}Continue with Google </Text>
-      </View>
-      <View style={styles.linkTextContainer}>
+        <Text onPress={googleLogin}>{'   '}Continue with Google </Text>
+      </View>      <View style={styles.linkTextContainer}>
         <Text style={styles.text}>Don't have an account? </Text>
         <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
           <Text style={styles.linkText}>Sign up</Text>
