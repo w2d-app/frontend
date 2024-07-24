@@ -4,9 +4,7 @@ export default {
     "updates": {
       "url": "https://u.expo.dev/75a95060-ed90-4838-94d5-36ef95b53acd"
     },
-    "runtimeVersion": {
-         "policy": "sdkVersion",
-       },
+
     "slug": "travel-app",
     "version": "1.0.0",
     "orientation": "portrait",
