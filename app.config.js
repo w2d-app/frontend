@@ -18,14 +18,16 @@ export default {
     },
   
     "ios": {
-      "buildNumber": "1",
 
+      "runtimeVersion": {
+        "policy": "appVersion"
+      },
       "supportsTablet": true,
       "bundleIdentifier": "app.w2d",
       "googleServicesFile": process.env.google_service_info_plist
     },
     "android": {
-      "buildNumber": "1",
+      "runtimeVersion": "1.0.0",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
