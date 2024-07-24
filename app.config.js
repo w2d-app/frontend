@@ -20,11 +20,14 @@ export default {
     },
   
     "ios": {
+      "buildNumber": "1",
+
       "supportsTablet": true,
       "bundleIdentifier": "app.w2d",
       "googleServicesFile": process.env.google_service_info_plist
     },
     "android": {
+      "buildNumber": "1",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
