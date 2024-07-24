@@ -1,6 +1,12 @@
 export default {
   "expo": {
     "name": "travel-app",
+    "updates": {
+       "url": "https://u.expo.dev/${projectID}",
+    },
+    "runtimeVersion": {
+         "policy": "sdkVersion",
+       },
     "slug": "travel-app",
     "version": "1.0.0",
     "orientation": "portrait",
