@@ -22,7 +22,7 @@ const CollectionHeader: React.FC<CollectionHeaderProps> = ({
   const imageSource = typeof profileImage === 'string' ? { uri: profileImage } : profileImage;
 
   // Define an array of categories
-  const categories = ["Cities", "Nature", "Food", "Limited", "View History"];
+  const categories = ["Cities", "By You", "Food", "Limited", "View History"];
 
   return (
     <View style={styles.headerContainer}>

@@ -2,6 +2,8 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import TestCollection from './screens/TestCollection';
+
 
 // Tab navigation screens
 import Home from "./screens/Home";
@@ -79,6 +81,7 @@ export default function Index() {
       <Stack.Screen name="TabNavigator" component={BottomTabNavigator} />
       <Stack.Screen name="SignUp" component={SignUp} />
       <Stack.Screen name="Explore" component={Explore} />
+      <Stack.Screen name="TestCollection" component={TestCollection} />
     </Stack.Navigator>
   );
 }
