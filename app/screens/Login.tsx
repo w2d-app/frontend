@@ -128,8 +128,9 @@ const Login: React.FC = () => {
       <Text> ——— Or continue with ——— </Text>
       <View style={styles.buttonContainer}>
         <Ionicons name={'logo-google'} />
-        <Text onPress={googleLogin}>{'   '}Continue with Google </Text>
-      </View>      <View style={styles.linkTextContainer}>
+        <Text onPress={googleLogin}>Continue with Google </Text>
+      </View>     
+       <View style={styles.linkTextContainer}>
         <Text style={styles.text}>Don't have an account? </Text>
         <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
           <Text style={styles.linkText}>Sign up</Text>
