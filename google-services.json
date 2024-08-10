@@ -1,0 +1,55 @@
+{
+    "project_info": {
+      "project_number": "1081340134333",
+      "project_id": "w2dapp",
+      "storage_bucket": "w2dapp.appspot.com"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:1081340134333:android:9df1c09d710280e7a708d4",
+          "android_client_info": {
+            "package_name": "app.w2d"
+          }
+        },
+        "oauth_client": [
+          {
+            "client_id": "1081340134333-hjn0djmhcird210djslskh5q3doi85m1.apps.googleusercontent.com",
+            "client_type": 1,
+            "android_info": {
+              "package_name": "app.w2d",
+              "certificate_hash": "c437803f30ff6c68a27c5086514942967324e4a9"
+            }
+          },
+          {
+            "client_id": "1081340134333-r7mlc1is85ijdkk87inf8gpc4hc0f0jg.apps.googleusercontent.com",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "AIzaSyBL_eiDYdOqN9K-jS3vJqYFi0hQ-4TFDtc"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": [
+              {
+                "client_id": "1081340134333-r7mlc1is85ijdkk87inf8gpc4hc0f0jg.apps.googleusercontent.com",
+                "client_type": 3
+              },
+              {
+                "client_id": "1081340134333-v2v66jajknhov0toanmgt6hiaotu3e90.apps.googleusercontent.com",
+                "client_type": 2,
+                "ios_info": {
+                  "bundle_id": "app.w2d"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }
+  
