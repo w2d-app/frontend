@@ -12,7 +12,7 @@ web-build/
 *.log
 *.keystore
 
-# google-services.json
+google-services.json
 GoogleService-Info.plist
 .env
 # macOS
