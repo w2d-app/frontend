@@ -11,6 +11,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {GoogleSignin, GoogleSigninButton, User} from "@react-native-google-signin/google-signin"
+import { useAuth } from '../AuthContext';
 type RootStackParamList = {
   TabNavigator: undefined;
   SignUp: undefined;
@@ -28,6 +29,7 @@ const Login: React.FC = () => {
   const [googleError, setGoogleError] = useState();
   const [googleUserInfo, setGoogleUserInfo] = useState<User>();
   const navigation = useNavigation<LoginScreenNavgationProp>();
+  const { signIn } = useAuth();
 
   /* We have to use useFocusEffect to clear the login error, username and password when the screen is focused
   we cannot use a useEffect hook because it will not run when the screen is focused again
@@ -129,7 +131,7 @@ const Login: React.FC = () => {
       <Text> ——— Or continue with ——— </Text>
       <View style={styles.buttonContainer}>
         <Ionicons name={'logo-google'} />
-        <Text onPress={googleLogin}>Continue with Google </Text>
+        <Text onPress={signIn}>Continue with Google </Text>
       </View>     
        <View style={styles.linkTextContainer}>
         <Text style={styles.text}>Don't have an account? </Text>
